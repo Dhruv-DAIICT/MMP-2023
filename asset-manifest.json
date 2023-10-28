@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/MMP-2023/static/css/main.63c7b50e.css",
-    "main.js": "/MMP-2023/static/js/main.0ed73883.js",
-    "static/js/787.24426799.chunk.js": "/MMP-2023/static/js/787.24426799.chunk.js",
-    "index.html": "/MMP-2023/index.html",
-    "main.63c7b50e.css.map": "/MMP-2023/static/css/main.63c7b50e.css.map",
-    "main.0ed73883.js.map": "/MMP-2023/static/js/main.0ed73883.js.map",
-    "787.24426799.chunk.js.map": "/MMP-2023/static/js/787.24426799.chunk.js.map"
+    "main.css": "/MMP-2023/react-flow-demo/static/css/main.63c7b50e.css",
+    "main.js": "/MMP-2023/react-flow-demo/static/js/main.2242dc23.js",
+    "static/js/787.24426799.chunk.js": "/MMP-2023/react-flow-demo/static/js/787.24426799.chunk.js",
+    "index.html": "/MMP-2023/react-flow-demo/index.html",
+    "main.63c7b50e.css.map": "/MMP-2023/react-flow-demo/static/css/main.63c7b50e.css.map",
+    "main.2242dc23.js.map": "/MMP-2023/react-flow-demo/static/js/main.2242dc23.js.map",
+    "787.24426799.chunk.js.map": "/MMP-2023/react-flow-demo/static/js/787.24426799.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.63c7b50e.css",
-    "static/js/main.0ed73883.js"
+    "static/js/main.2242dc23.js"
   ]
 }
