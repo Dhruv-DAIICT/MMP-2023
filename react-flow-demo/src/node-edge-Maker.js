@@ -1,15 +1,16 @@
-import requirements from './templete';
+import {req1, req3} from './templete.js';
 // const requirements = require('./templete.js');
+let requirements = localStorage.getItem('l_req') ? JSON.parse(localStorage.getItem('l_req')) : req1;
 let edgeList =[];
 let IntermediateNodes = [];
 let viewType = "Priority";
 let booleanOperator = ['AND','OR','NOT'];
 const colors = {
     "default" : {1: '#FF8080', 2: '#FFD080', 3: '#A8E9FF',4:"#ECFEEC"},
-    "Priority" : {1:'#FF5733',2:'#FF6F61',3:'#FF9999',4:'#FFCCCC' },
-    "Risk" : {Critical:'#1a53ff',High: '#3366FF',Medium: '#99CCFF',Low: '#E6F7FF'},
+    "Risk" : {Critical:'#FF5733',High:'#FF6F61',Medium:'#FF9999',Low:'#FFCCCC' },
+    "Priority" : {1:'#1a53ff',2: '#3366FF',3: '#99CCFF',4: '#E6F7FF'},
 }
-  
+
 export function setViewType(type,nodes){
     viewType = type;
     return setColor(viewType,nodes);
@@ -110,4 +111,27 @@ export function setModuleConnectivity(type,nodes){
         return nodeElements;
     }
     nodeElements.push(...IntermediateNodes,...groupNodes);
-export {edgeList,nodeElements};
+
+    let parameterContainer= {};
+    edgeList.map((edge)=>{
+        if(edge.target in parameterContainer){
+            parameterContainer[edge.target][1].push(edge.source);
+        }
+        else{
+            parameterContainer[edge.target] = [edge.label,[edge.source]];
+        }
+    })
+
+    let booleanExpressions = [];
+    for(const group in parameterContainer){
+        let ex = `${group} = `;
+        parameterContainer[group][1].map((src,index)=>{
+            if(parameterContainer[group][0]=='NOT'){
+                ex += "NOT " + src 
+            }else{
+                ex += " " + src +" "+ (index == parameterContainer[group][1].length-1 ? "" : parameterContainer[group][0]);
+            }
+        })
+        booleanExpressions.push(ex);
+    }
+export {edgeList,nodeElements, booleanExpressions};
