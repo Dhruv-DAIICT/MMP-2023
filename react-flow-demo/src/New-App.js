@@ -6,9 +6,11 @@ import ReactFlow, {
   useNodesState,
   useEdgesState,
   useReactFlow,
+  Controls,
+  Background
 } from 'reactflow';
 
-import { setViewType, setModuleConnectivity, edgeList, nodeElements } from './node-edge-Maker'
+import { setViewType, setModuleConnectivity, edgeList, nodeElements, booleanExpressions } from './node-edge-Maker'
 import 'reactflow/dist/style.css';
 
 const g = new Dagre.graphlib.Graph().setDefaultEdgeLabel(() => ({}));
@@ -64,9 +66,6 @@ const LayoutFlow = () => {
   const moduleButton = (type) => {
     const New = setModuleConnectivity(type, nodes)
     setNodes((prevNodes) => {
-      // Create a copy of the previous nodes array and remove the last node
-      // const newNodeArray = [...prevNodes];
-      // newNodeArray.pop();
       return New;
     });
   }
@@ -115,6 +114,9 @@ const LayoutFlow = () => {
   </div>
   <div>
     <h4>Bolean expressions for this graph:</h4>
+    {booleanExpressions.map((str, index) => (
+        <p key={index}>{str}</p>
+      ))}
   </div>
 </Panel>
 
@@ -126,7 +128,9 @@ export default function () {
   return (
     <div style={{ width: '100%', height: window.innerHeight }}>
       <ReactFlowProvider>
+        <Background />
         <LayoutFlow />
+        <Controls />
       </ReactFlowProvider>
     </div>
   );
