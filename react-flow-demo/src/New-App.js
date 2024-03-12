@@ -94,6 +94,8 @@ const LayoutFlow = () => {
   const [testCaseString, setTestCaseString] = useState('');
   const [testCases, setTestCases] = useState([]);
 
+  const [requiredTestCases, setRequiredTestCases] = useState([]);
+
   const onLayout = (direction) => {
     const layouted = getLayoutedElements(nodes, edges, { direction });
 
@@ -181,6 +183,14 @@ const LayoutFlow = () => {
     setModalIsOpen(true);
   };
 
+  const openGeneralNewPage = () => {
+    const combinedContent = booleanExpressions.map((str, index) => `Expression ${index + 1}: ${str}`).join('<br>');
+    const newPageUrl = `data:text/html;charset=utf-8,${encodeURI(`<html><head><title>New Page</title></head><body>${combinedContent}</body></html>`)}`;
+    window.open(newPageUrl, '_blank');
+  };
+  
+  
+
   return (
     <ReactFlow
       nodes={nodes}
@@ -222,12 +232,17 @@ const LayoutFlow = () => {
           <input type="radio" name="view" value="Risk" id="riskView" onClick={() => ViewButton('Risk')} />
           <label htmlFor="riskView">Risk View</label>
         </div>
+        
         <div>
           <h4>Boolean expressions for this graph:</h4>
+          <div>
+          <button onClick={() => openGeneralNewPage()}>Open General New Page</button>
+        </div>
           {booleanExpressions.map((str, index) => (
             <div key={index}>
               <p>{str}</p>
-              <button onClick={() => generateTestCase(str)}>Generate Test Case</button>
+              
+              <button onClick={() => generateTestCase(str)}>Generate Full Test Case</button>
             </div>
           ))}
         </div>
@@ -237,7 +252,7 @@ const LayoutFlow = () => {
         isOpen={modalIsOpen}
         onRequestClose={() => setModalIsOpen(false)}
         content={`Test Case for: ${testCaseString}`}
-        testCases={testCases}
+        testCases={requiredTestCases.length > 0 ? requiredTestCases : testCases}
       />
     </ReactFlow>
   );
